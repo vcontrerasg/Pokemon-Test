@@ -15,33 +15,55 @@ body {
     font-size: 14px;
 }
 
+.fondo {
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #00043a7e;
+    display: flex;
+
+    justify-content: center;
+}
+
+.fondo_gameboy {
+    background-image: url("images/background_gb.jpg");
+    
+    padding-top: 180px;
+    width: 736px;
+    height: 980px;
+    display: flex;
+    justify-content: center;
+}
+
 .game-container {
-    width: 480px;
-    height: 320px;
-    background: #000000;
+    width: 77%;
+    height: 50%;
+    background-color: #e4c5a269;
     border: 2px solid #ffffff;
     position: relative;
+
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
+    border-color: #0000003d;
 }
 
 .battle-area {
-    height: 200px;
+    height: 320px;
     position: relative;
-    background: #000000;
+    background-image: url("images/background_game.png");
     border-bottom: 2px solid #ffffff;
 }
 
 .enemy-pokemon {
     position: absolute;
-    top: 20px;
+    top: 110px;
     right: 20px;
 }
 
 .enemy-pokemon .pokemon-sprite {
-    width: 80px;
-    height: 80px;
+    width: 200px;
+    height: 200px;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
@@ -49,17 +71,17 @@ body {
 
 .enemy-stats {
     position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #000000;
-    border: 1px solid #ffffff;
+    top: -80px;
+    left: 60px;
+    background: #dbc9c1be;
+    border: 1px solid #00000054;
     padding: 4px 8px;
 }
 
 .player-pokemon {
     position: absolute;
     bottom: 20px;
-    left: 20px;
+    left: 100px;
 }
 
 .player-pokemon .pokemon-sprite {
@@ -72,15 +94,15 @@ body {
 
 .player-stats {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
-    background: #000000;
-    border: 1px solid #ffffff;
+    bottom: 100px;
+    right: 20px;
+    background: #dbc9c1be;
+    border: 1px solid #000000;
     padding: 4px 8px;
 }
 
 .stat-name {
-    color: #ffffff;
+    color: #000000;
     font-size: 12px;
     font-weight: bold;
     margin-bottom: 4px;
@@ -96,7 +118,7 @@ body {
 }
 
 .hp-label {
-    color: #ffffff;
+    color: #000000;
     font-size: 10px;
     min-width: 20px;
 }
@@ -118,7 +140,7 @@ body {
 }
 
 .hp-numbers {
-    color: #ffffff;
+    color: #000000;
     font-size: 10px;
     min-width: 35px;
     text-align: right;
@@ -126,19 +148,19 @@ body {
 
 .text-box {
     height: 80px;
-    background: #000000;
-    border-top: 2px solid #ffffff;
+    background: #f0f0f0c4;
+    border: 8px solid #acacac;
     padding: 8px;
     position: relative;
 }
 
 .text-content {
-    color: #ffffff;
+    color: #000000;
     font-size: 12px;
     line-height: 1.4;
     padding: 4px 8px;
-    background: #000000;
-    border: 1px solid #ffffff;
+    background: #f0f0f0c4;
+    border: 1px solid #000000b7;
     min-height: 48px;
     display: flex;
     align-items: center;
@@ -160,10 +182,10 @@ body {
 }
 
 .menu-option {
-    background: #000000;
-    border: 1px solid #ffffff;
-    color: #ffffff;
-    font-size: 10px;
+    background: #b9b6cec4;
+    border: 2px solid #f0f0f0c4;
+    color: #000000;
+    font-size: 15px;
     font-weight: bold;
     display: flex;
     align-items: center;
@@ -194,7 +216,7 @@ body {
     width: 240px;
     height: 80px;
     background: #000000;
-    border: 2px solid #ffffff;
+    border: 3px solid #f0f0f0c4;
     border-bottom: none;
     border-right: none;
     display: grid;
