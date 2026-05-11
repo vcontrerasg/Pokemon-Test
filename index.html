@@ -27,6 +27,8 @@
         </div>
     </div>
 
+    <audio id="battle-music" src="audios/battle-theme.mp3" loop></audio>
+
     <div class="fondo">
         <div class="fondo_gameboy">
             <div class="game-container">
@@ -70,12 +72,8 @@
                 <div class="action-menu" id="action-menu" style="display: none;">
                     <div class="menu-option" onclick="showBattleMenu()">LUCHA</div>
                     <div class="menu-option" onclick="huir()">HUIR</div>
+                    <div class="menu-option" onclick="abrirSelector()">CAMBIAR</div>
                     <div class="menu-option disabled">-</div>
-                    <div class="menu-option disabled">-</div>
-                </div>
-                <div class="volume-control">
-                    <label for="volume-slider">VOL:</label>
-                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
                 </div>
             </div>
         </div>

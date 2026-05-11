@@ -38,16 +38,27 @@ let pokemonActivo = null;
 let hpJugador = 0;
 let hpEnemigo = 50;
 const hpEnemigoMax = 50;
+let volumenGlobal = 0.07;
+
+const musicaBatalla = document.getElementById('battle-music');
+
+function reproducirSonido(ruta) {
+    const audio = new Audio(ruta);
+    audio.volume = volumenGlobal;
+    audio.play().catch(e => {});
+}
 
 function seleccionarPokemon(nombrePokemon) {
     pokemonActivo = POKEDEX[nombrePokemon];
     hpJugador = pokemonActivo.hpMax;
-    hpEnemigo = hpEnemigoMax;
-
+    
     document.getElementById('nombre-jugador').textContent = pokemonActivo.nombre;
     document.getElementById('sprite-jugador').src = pokemonActivo.sprite;
     document.getElementById('pokemon-selector').style.display = 'none';
     
+    musicaBatalla.volume = volumenGlobal;
+    musicaBatalla.play().catch(e => {});
+
     actualizarHP();
     iniciarJuego();
 }
@@ -59,9 +70,10 @@ function iniciarJuego() {
     }, 2000);
 }
 
-function reproducirSonido(ruta) {
-    const audio = new Audio(ruta);
-    audio.play().catch(e => {});
+function showActionMenu() {
+    document.getElementById('battle-menu').style.display = 'none';
+    document.getElementById('action-menu').style.display = 'grid';
+    mostrarStatus(`¿Qué debe hacer ${pokemonActivo.nombre}?`);
 }
 
 function showBattleMenu() {
@@ -102,17 +114,7 @@ function ejecutarAtaque(movimiento) {
 
         setTimeout(turnoEnemigo, 1500);
     }, 1000);
-}
 
-function actualizarHP() {
-    document.getElementById('hpjugador').textContent = hpJugador;
-    document.getElementById('hpenemigo').textContent = hpEnemigo;
-
-    const porcJugador = (hpJugador / pokemonActivo.hpMax) * 100;
-    const porcEnemigo = (hpEnemigo / hpEnemigoMax) * 100;
-
-    document.getElementById('hpjugador-bar').style.width = porcJugador + '%';
-    document.getElementById('hpenemigo-bar').style.width = porcEnemigo + '%';
 }
 
 function turnoEnemigo() {
@@ -127,43 +129,47 @@ function turnoEnemigo() {
     }, 2000);
 }
 
-function showActionMenu() {
-    document.getElementById('battle-menu').style.display = 'none';
-    document.getElementById('action-menu').style.display = 'grid';
-    mostrarStatus(`¿Qué debe hacer ${pokemonActivo.nombre}?`);
-}
+function actualizarHP() {
+    document.getElementById('hpjugador').textContent = hpJugador;
+    document.getElementById('hpenemigo').textContent = hpEnemigo;
 
-function mostrarStatus(texto) {
-    document.getElementById('status').textContent = texto;
+    const porcJugador = (hpJugador / pokemonActivo.hpMax) * 100;
+    const porcEnemigo = (hpEnemigo / hpEnemigoMax) * 100;
+
+    document.getElementById('hpjugador-bar').style.width = porcJugador + '%';
+    document.getElementById('hpenemigo-bar').style.width = porcEnemigo + '%';
 }
 
 function verificarGanador() {
-    if (hpEnemigo <= 0) {
-        mostrarStatus('¡ZOROARK se debilitó! ¡Ganaste!');
-        setTimeout(() => location.reload(), 3000);
-        return true;
-    }
-    if (hpJugador <= 0) {
-        mostrarStatus(`¡${pokemonActivo.nombre} se debilitó! Perdiste...`);
+    if (hpEnemigo <= 0 || hpJugador <= 0) {
+        musicaBatalla.pause(); 
+        musicaBatalla.currentTime = 0; 
+
+        if (hpEnemigo <= 0) {
+            mostrarStatus('¡ZOROARK se debilitó! ¡Ganaste!');
+        } else {
+            mostrarStatus(`¡${pokemonActivo.nombre} se debilitó! Perdiste...`);
+        }
+
         setTimeout(() => location.reload(), 3000);
         return true;
     }
     return false;
 }
 
+function mostrarStatus(texto) {
+    document.getElementById('status').textContent = texto;
+}
+
+function abrirSelector() {
+    document.getElementById('pokemon-selector').style.display = 'flex';
+    document.getElementById('action-menu').style.display = 'none';
+    document.getElementById('battle-menu').style.display = 'none';
+    mostrarStatus("¿A quién vas a elegir ahora?");
+}
+
 function huir() {
     mostrarStatus("¡Escapaste de la batalla!");
     setTimeout(() => location.reload(), 2000);
-}
 
-let volumenGlobal = 0.5;
-
-document.getElementById('volume-slider').addEventListener('input', (e) => {
-    volumenGlobal = e.target.value;
-});
-
-function reproducirSonido(ruta) {
-    const audio = new Audio(ruta);
-    audio.volume = volumenGlobal;
-    audio.play().catch(e => {});
 }
