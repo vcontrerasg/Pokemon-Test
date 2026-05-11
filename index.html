@@ -29,14 +29,16 @@
 
     <audio id="battle-music" src="audios/battle-theme.mp3" loop></audio>
 
+    <audio id="victory-theme" src="audios/victory.mp3"></audio>
+
     <div class="fondo">
         <div class="fondo_gameboy">
             <div class="game-container">
                 <div class="battle-area">
                     <div class="enemy-pokemon">
-                        <img src="images/Zoroark.png" id="sprite-enemigo" alt="Enemigo" class="pokemon-sprite enemy-sprite">
+                        <img src="images/zorua.gif" id="sprite-enemigo" alt="Enemigo" class="pokemon-sprite enemy-sprite">
                         <div class="pokemon-stats enemy-stats">
-                            <div class="stat-name" id="nombre-enemigo">ZOROARK</div>
+                            <div class="stat-name" id="nombre-enemigo">ZORUA</div>
                             <div class="hp-container">
                                 <div class="hp-label">HP:</div>
                                 <div class="hp-bar">
@@ -73,7 +75,7 @@
                     <div class="menu-option" onclick="showBattleMenu()">LUCHA</div>
                     <div class="menu-option" onclick="huir()">HUIR</div>
                     <div class="menu-option" onclick="abrirSelector()">CAMBIAR</div>
-                    <div class="menu-option disabled">-</div>
+                    <div class="menu-option" onclick="AbrirMochila()">MOCHILA</div>
                 </div>
             </div>
         </div>

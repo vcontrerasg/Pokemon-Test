@@ -89,12 +89,12 @@ body {
 .enemy-pokemon {
     position: absolute;
     top: 110px;
-    right: 20px;
+    right: 50px;
 }
 
 .enemy-pokemon .pokemon-sprite {
-    width: 200px;
-    height: 200px;
+    width: 120px;
+    height: 120px;
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
@@ -102,8 +102,8 @@ body {
 
 .enemy-stats {
     position: absolute;
-    top: -80px;
-    left: 60px;
+    top: -70px;
+    left: 30px;
     background: #dbc9c1be;
     border: 1px solid #00000054;
     padding: 4px 8px;
@@ -227,8 +227,9 @@ body {
     padding: 4px;
 }
 
-.menu-option:hover {
-    background: #444444;
+.action-menu .menu-option:hover {
+    background: #7a7791;
+    color: #ffffff;
 }
 
 .menu-option.disabled {
@@ -253,6 +254,18 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr;
+    color: #000000;
+    font-size: 14px;
+    text-shadow: none;
+}
+
+#status {
+    transition: all 0.3s ease;
+}
+
+.volume-control label {
+    font-size: 10px;
+    color: white;
 }
 
 @keyframes blink {
@@ -292,3 +305,4 @@ body {
         height: 60px;
     }
 }
+

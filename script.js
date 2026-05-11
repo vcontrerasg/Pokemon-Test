@@ -76,6 +76,10 @@ function showActionMenu() {
     mostrarStatus(`¿Qué debe hacer ${pokemonActivo.nombre}?`);
 }
 
+function AbrirMochila() {
+    mostrarStatus("¡Mochila vacía! No tienes objetos todavía.");
+}
+
 function showBattleMenu() {
     document.getElementById('action-menu').style.display = 'none';
     const battleMenu = document.getElementById('battle-menu');
@@ -122,7 +126,7 @@ function turnoEnemigo() {
     hpJugador = Math.max(0, hpJugador - daño);
     actualizarHP();
     
-    mostrarStatus(`¡ZOROARK usó ATAQUE NORMAL! Recibes ${daño} de daño.`);
+    mostrarStatus(`¡ZORUA usó ATAQUE NORMAL! Recibes ${daño} de daño.`);
 
     setTimeout(() => {
         if (!verificarGanador()) showActionMenu();
@@ -141,16 +145,30 @@ function actualizarHP() {
 }
 
 function verificarGanador() {
-    if (hpEnemigo <= 0 || hpJugador <= 0) {
-        musicaBatalla.pause(); 
-        musicaBatalla.currentTime = 0; 
+    if (hpEnemigo <= 0) {
+        musicaBatalla.pause();
+        musicaBatalla.currentTime = 0;
+        
+        reproducirMusicaVictoria();
 
-        if (hpEnemigo <= 0) {
-            mostrarStatus('¡ZOROARK se debilitó! ¡Ganaste!');
-        } else {
-            mostrarStatus(`¡${pokemonActivo.nombre} se debilitó! Perdiste...`);
-        }
+        const experiencia = Math.floor(Math.random() * (150 - 80 + 1)) + 80;
+        
+        mostrarStatus(`¡ZOROARK se debilitó! ¡Ganaste la batalla!`);
 
+        setTimeout(() => {
+            mostrarStatus(`¡${pokemonActivo.nombre} ganó ${experiencia} puntos de EXP.!`);
+        }, 2000);
+
+        setTimeout(() => {
+            location.reload();
+        }, 5000);
+        
+        return true;
+    }
+    
+    if (hpJugador <= 0) {
+        musicaBatalla.pause();
+        mostrarStatus(`¡${pokemonActivo.nombre} se debilitó! Perdiste...`);
         setTimeout(() => location.reload(), 3000);
         return true;
     }
@@ -172,4 +190,13 @@ function huir() {
     mostrarStatus("¡Escapaste de la batalla!");
     setTimeout(() => location.reload(), 2000);
 
+}
+
+const musicaVictoria = document.getElementById('victory-theme');
+
+function reproducirMusicaVictoria() {
+    if (musicaVictoria) {
+        musicaVictoria.volume = volumenGlobal;
+        musicaVictoria.play().catch(e => console.log("Error al reproducir victoria"));
+    }
 }
