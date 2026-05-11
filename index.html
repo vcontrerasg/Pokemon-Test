@@ -3,18 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Batalla Pokémon</title>
+    <title>Batalla Pokémon Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="pokemon-selector" class="selector-overlay">
+        <div class="selector-content">
+            <h2>¡ELIGE TU POKÉMON!</h2>
+            <div class="pokemon-options">
+                <div class="sel-card" onclick="seleccionarPokemon('bulbasaur')">
+                    <img src="images/bulbasaur.gif" alt="Bulbasaur">
+                    <p>BULBASAUR</p>
+                </div>
+                <div class="sel-card" onclick="seleccionarPokemon('charmander')">
+                    <img src="images/charmander.gif" alt="Charmander">
+                    <p>CHARMANDER</p>
+                </div>
+                <div class="sel-card" onclick="seleccionarPokemon('squirtle')">
+                    <img src="images/squirtle.gif" alt="Squirtle">
+                    <p>SQUIRTLE</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="fondo">
         <div class="fondo_gameboy">
             <div class="game-container">
                 <div class="battle-area">
                     <div class="enemy-pokemon">
-                        <img src="images/Zoroark.png" alt="Zoroark" class="pokemon-sprite enemy-sprite">
+                        <img src="images/Zoroark.png" id="sprite-enemigo" alt="Enemigo" class="pokemon-sprite enemy-sprite">
                         <div class="pokemon-stats enemy-stats">
-                            <div class="stat-name">ZOROARK</div>
+                            <div class="stat-name" id="nombre-enemigo">ZOROARK</div>
                             <div class="hp-container">
                                 <div class="hp-label">HP:</div>
                                 <div class="hp-bar">
@@ -26,44 +46,41 @@
                     </div>
 
                     <div class="player-pokemon">
-                        <img src="images/bulbasaur.gif" alt="Bulbasaur" class="pokemon-sprite player-sprite">
+                        <img src="" id="sprite-jugador" alt="Tu Pokémon" class="pokemon-sprite player-sprite">
                         <div class="pokemon-stats player-stats">
-                            <div class="stat-name">BULBASAUR</div>
+                            <div class="stat-name" id="nombre-jugador">---</div>
                             <div class="hp-container">
                                 <div class="hp-label">HP:</div>
                                 <div class="hp-bar">
-                                    <div class="hp-fill" id="hpjugador1-bar"></div>
+                                    <div class="hp-fill" id="hpjugador-bar"></div>
                                 </div>
-                                <div class="hp-numbers"><span id="hpjugador1">50</span>/50</div>
+                                <div class="hp-numbers"><span id="hpjugador">50</span>/50</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="text-box">
-                    <div class="text-content" id="status">¡Un ZOROARK salvaje apareció!</div>
+                    <div class="text-content" id="status">Esperando elección...</div>
                 </div>
 
-                <div class="battle-menu" id="battle-menu">
-                    <div class="menu-option" onclick="placaje()">PLACAJE</div>
-                    <audio src="audios/Tackle.wav"></audio>
-                    <div class="menu-option" onclick="lanzallamas()">LANZALLAMAS</div>
-                    <audio src="audios/Flamethrower.wav"></audio>
-                    <div class="menu-option" onclick="rayoSolar()">RAYO SOLAR</div>
-                    <audio src="audios/SolarBeam.wav"></audio>
-                    <div class="menu-option" onclick="defensa()">DEFENSA</div>
-                    <audio src="audios/DefenseCurl.wav"></audio>
-                </div>
+                <div class="battle-menu" id="battle-menu" style="display: none;">
+                    </div>
 
                 <div class="action-menu" id="action-menu" style="display: none;">
                     <div class="menu-option" onclick="showBattleMenu()">LUCHA</div>
-                    <div class="menu-option" onclick="resetearJuego()">HUIR</div>
+                    <div class="menu-option" onclick="huir()">HUIR</div>
                     <div class="menu-option disabled">-</div>
                     <div class="menu-option disabled">-</div>
+                </div>
+                <div class="volume-control">
+                    <label for="volume-slider">VOL:</label>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.5">
                 </div>
             </div>
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
