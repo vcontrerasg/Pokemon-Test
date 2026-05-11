@@ -4,10 +4,10 @@ const POKEDEX = {
         hpMax: 50,
         sprite: 'images/bulbasaur.gif',
         movimientos: [
-            { nombre: 'Placaje', daño: [8, 12], sonido: 'audios/tackle.wav' },
-            { nombre: 'Hoja Afilada', daño: [12, 18], sonido: 'audios/razorleaf.wav' },
-            { nombre: 'Rayo Solar', daño: [15, 20], sonido: 'audios/solarbeam.wav' },
-            { nombre: 'Síntesis', cura: [10, 15], sonido: 'audios/synthesis.wav' }
+            { nombre: 'Placaje', daño: [8, 12], sonido: 'audios/Tackle.wav' },
+            { nombre: 'Hoja Afilada', daño: [12, 18], sonido: 'audios/RazorLeaf.wav' },
+            { nombre: 'Rayo Solar', daño: [15, 20], sonido: 'audios/Solarbeam.wav' },
+            { nombre: 'Síntesis', cura: [10, 15], sonido: 'audios/Synthesis.wav' }
         ]
     },
     charmander: {
@@ -15,10 +15,10 @@ const POKEDEX = {
         hpMax: 45,
         sprite: 'images/charmander.gif',
         movimientos: [
-            { nombre: 'Arañazo', daño: [7, 10], sonido: 'audios/scratch.wav' },
-            { nombre: 'Ascuas', daño: [10, 15], sonido: 'audios/ember.wav' },
-            { nombre: 'Lanzallamas', daño: [18, 25], sonido: 'audios/flamethrower.wav' },
-            { nombre: 'Gruñido', daño: [2, 5], sonido: 'audios/growl.mp3' }
+            { nombre: 'Arañazo', daño: [7, 10], sonido: 'audios/Scratch.wav' },
+            { nombre: 'Ascuas', daño: [10, 15], sonido: 'audios/Ember.wav' },
+            { nombre: 'Lanzallamas', daño: [18, 25], sonido: 'audios/Flamethrower.wav' },
+            { nombre: 'Gruñido', daño: [2, 5], sonido: 'audios/Growl.mp3' }
         ]
     },
     squirtle: {
@@ -26,7 +26,7 @@ const POKEDEX = {
         hpMax: 55,
         sprite: 'images/squirtle.gif',
         movimientos: [
-            { nombre: 'Placaje', daño: [8, 12], sonido: 'audios/tackle.wav' },
+            { nombre: 'Placaje', daño: [8, 12], sonido: 'audios/Tackle.wav' },
             { nombre: 'Burbuja', daño: [10, 14], sonido: 'audios/Bubble.wav' },
             { nombre: 'Pistola Agua', daño: [14, 20], sonido: 'audios/WaterGun.wav' },
             { nombre: 'Refugio', cura: [5, 10], sonido: 'audios/Withdraw.wav' }
