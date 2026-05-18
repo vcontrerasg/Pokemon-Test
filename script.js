@@ -98,6 +98,19 @@ function reproducirMusicaVictoria() {
     }
 }
 
+function efectoPorNombreMovimiento(nombre) {
+    if (!nombre) return null;
+    const clave = nombre.toLowerCase();
+
+    if (/(ember|flam(e|ethrower)|burn|heat|campfire|incinerate)/.test(clave)) {
+        return 'QUEMADO';
+    }
+    if (/(thunder|zap|electric|impact|spark|volt|rayo|onda trueno|impactrueno|trueno|thunder-punch)/.test(clave)) {
+        return 'PARALIZADO';
+    }
+    return null;
+}
+
 async function buscarEnPokeApi() {
     const input = document.getElementById('search-input');
     const nombreBuscar = input.value.trim().toLowerCase();
@@ -111,18 +124,28 @@ async function buscarEnPokeApi() {
         if (!respuesta.ok) throw new Error("Pokémon no encontrado");
 
         const data = await respuesta.json();
+
+        const movimientosApi = [
+            data.moves[0]?.move,
+            data.moves[1]?.move,
+            data.moves[2]?.move
+        ];
         
         const nuevoPokemon = {
             nombre: data.name.toUpperCase(),
             hpMax: data.stats[0].base_stat,
             spriteFrente: data.sprites.front_default || 'images/default.gif', 
             spriteEspalda: data.sprites.back_default || data.sprites.front_default || 'images/default_back.gif',
-            movimientos: [
-                { nombre: data.moves[0]?.move.name || 'Placaje', daño: [8, 12], sonido: 'audios/Tackle.wav', efecto: null },
-                { nombre: data.moves[1]?.move.name || 'Golpe Cabeza', daño: [10, 15], sonido: 'audios/Tackle.wav', efecto: 'PARALIZADO' },
-                { nombre: data.moves[2]?.move.name || 'Poder Oculto', daño: [12, 18], sonido: 'audios/Scratch.wav', efecto: 'QUEMADO' },
-                { nombre: 'Descanso', cura: [12, 20], sonido: 'audios/Synthesis.wav', efecto: null }
-            ]
+             movimientos: movimientosApi.map((move, index) => {
+                const nombreMovimiento = move?.name ? move.name.replace(/-/g, ' ').toUpperCase() :
+                    ['Placaje', 'Golpe Cabeza', 'Poder Oculto'][index] || 'Ataque';
+                return {
+                    nombre: nombreMovimiento,
+                    daño: [8, 12],
+                    sonido: 'audios/Tackle.wav',
+                    efecto: efectoPorNombreMovimiento(move?.name)
+                };
+            }).concat([{ nombre: 'Descanso', cura: [12, 20], sonido: 'audios/Synthesis.wav', efecto: null }])
         };
 
         if(equipoJugador.length < 3) {
