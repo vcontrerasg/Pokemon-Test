@@ -7,74 +7,115 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="retro-alert" class="retro-alert" style="display: none;">
+        <div class="retro-alert-content">
+            <p id="alert-message">ERROR</p>
+            <button onclick="cerrarAlerta()">OK</button>
+        </div>
+    </div>
+
     <div id="pokemon-selector" class="selector-overlay">
         <div class="selector-content">
-            <h2>¡ELIGE TU POKÉMON!</h2>
-            <div class="pokemon-options">
-                <div class="sel-card" onclick="seleccionarPokemon('bulbasaur')">
-                    <img src="images/bulbasaur.gif" alt="Bulbasaur">
+            <h2 id="selector-titulo">¡ELIGE 3 POKÉMON PARA TU EQUIPO!</h2>
+            <div class="pokemon-options" id="pokemon-options-container">
+                <div class="sel-card" id="card-bulbasaur" onclick="seleccionarParaEquipo('bulbasaur')">
+                    <img src="images/bulbasaur.png" alt="Bulbasaur">
                     <p>BULBASAUR</p>
                 </div>
-                <div class="sel-card" onclick="seleccionarPokemon('charmander')">
-                    <img src="images/charmander.gif" alt="Charmander">
+                <div class="sel-card" id="card-charmander" onclick="seleccionarParaEquipo('charmander')">
+                    <img src="images/charmander.png" alt="Charmander">
                     <p>CHARMANDER</p>
                 </div>
-                <div class="sel-card" onclick="seleccionarPokemon('squirtle')">
-                    <img src="images/squirtle.gif" alt="Squirtle">
+                <div class="sel-card" id="card-squirtle" onclick="seleccionarParaEquipo('squirtle')">
+                    <img src="images/squirtle.png" alt="Squirtle">
                     <p>SQUIRTLE</p>
                 </div>
+                <div class="sel-card" id="card-pikachu" onclick="seleccionarParaEquipo('pikachu')">
+                    <img src="images/pikachu.png" alt="Pikachu">
+                    <p>PIKACHU</p>
+                </div>
+                <div class="sel-card" id="card-eevee" onclick="seleccionarParaEquipo('eevee')">
+                    <img src="images/eevee.png" alt="Eevee">
+                    <p>EEVEE</p>
+                </div>
+                <div class="sel-card" id="card-jigglypuff" onclick="seleccionarParaEquipo('jigglypuff')">
+                    <img src="images/jigglypuff.png" alt="Jigglypuff">
+                    <p>JIGGLYPUFF</p>
+                </div>
+            </div>
+            
+            <div class="api-search-box">
+                <h3>¿QUIERES REEMPLAZAR UNO DE LOS 6 CON LA POKÉAPI?</h3>
+                <input type="text" id="search-input" placeholder="Ej: gengar, lucario...">
+                <button onclick="buscarEnPokeApi()">¡REEMPLAZAR!</button>
+            </div>
+            
+            <div class="team-summary" id="team-summary-box">
+                TU EQUIPO: <span id="team-slots">--- / --- / ---</span>
             </div>
         </div>
     </div>
 
     <audio id="battle-music" src="audios/battle-theme.mp3" loop></audio>
-
     <audio id="victory-theme" src="audios/victory.mp3"></audio>
 
     <div class="fondo">
         <div class="fondo_gameboy">
             <div class="game-container">
                 <div class="battle-area">
-                    <div class="enemy-pokemon">
-                        <img src="images/zorua.gif" id="sprite-enemigo" alt="Enemigo" class="pokemon-sprite enemy-sprite">
-                        <div class="pokemon-stats enemy-stats">
-                            <div class="stat-name" id="nombre-enemigo">ZORUA</div>
-                            <div class="hp-container">
-                                <div class="hp-label">HP:</div>
-                                <div class="hp-bar">
-                                    <div class="hp-fill" id="hpenemigo-bar"></div>
-                                </div>
-                                <div class="hp-numbers"><span id="hpenemigo">50</span>/50</div>
+                    
+                    <div class="pokemon-stats enemy-stats">
+                        <div class="stats-header">
+                            <div class="stat-name" id="nombre-enemigo">---</div>
+                            <div class="sub-stats-top">
+                                <span id="contador-enemigos">Poké: 3</span>
+                                <div id="estado-enemigo" class="status-badge"></div>
                             </div>
                         </div>
+                        <div class="hp-container-gba">
+                            <div class="hp-label-gba">PS</div>
+                            <div class="hp-bar-gba">
+                                <div class="hp-fill" id="hpenemigo-bar"></div>
+                            </div>
+                        </div>
+                        <div class="hp-numbers-gba"><span id="hpenemigo">0</span>/<span id="hpmax-enemigo">0</span></div>
+                    </div>
+
+                    <div class="enemy-pokemon">
+                        <img src="" id="sprite-enemigo" alt="Enemigo" class="pokemon-sprite enemy-sprite">
+                    </div>
+
+                    <div class="pokemon-stats player-stats">
+                        <div class="stats-header">
+                            <div class="stat-name" id="nombre-jugador">---</div>
+                            <span id="nivel-jugador" class="level-label-gba">Lv. 5</span>
+                            <div id="estado-jugador" class="status-badge"></div>
+                        </div>
+                        <div class="hp-container-gba">
+                            <div class="hp-label-gba">PS</div>
+                            <div class="hp-bar-gba">
+                                <div class="hp-fill" id="hpjugador-bar"></div>
+                            </div>
+                        </div>
+                        <div class="hp-numbers-gba"><span id="hpjugador">0</span>/<span id="hpmax-jugador">0</span></div>
                     </div>
 
                     <div class="player-pokemon">
                         <img src="" id="sprite-jugador" alt="Tu Pokémon" class="pokemon-sprite player-sprite">
-                        <div class="pokemon-stats player-stats">
-                            <div class="stat-name" id="nombre-jugador">---</div>
-                            <div class="hp-container">
-                                <div class="hp-label">HP:</div>
-                                <div class="hp-bar">
-                                    <div class="hp-fill" id="hpjugador-bar"></div>
-                                </div>
-                                <div class="hp-numbers"><span id="hpjugador">50</span>/50</div>
-                            </div>
-                        </div>
                     </div>
+
                 </div>
 
                 <div class="text-box">
-                    <div class="text-content" id="status">Esperando elección...</div>
+                    <div class="text-content" id="status"></div>
                 </div>
 
-                <div class="battle-menu" id="battle-menu" style="display: none;">
-                    </div>
+                <div class="battle-menu" id="battle-menu" style="display: none;"></div>
 
                 <div class="action-menu" id="action-menu" style="display: none;">
                     <div class="menu-option" onclick="showBattleMenu()">LUCHA</div>
                     <div class="menu-option" onclick="huir()">HUIR</div>
-                    <div class="menu-option" onclick="abrirSelector()">CAMBIAR</div>
+                    <div class="menu-option" onclick="abrirCambioIntermedio()">CAMBIAR</div>
                     <div class="menu-option" onclick="AbrirMochila()">MOCHILA</div>
                 </div>
             </div>
