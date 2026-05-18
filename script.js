@@ -635,7 +635,11 @@ function actualizarEnfoqueVisualTeclado() {
     }
 }
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', function(event) {       
+    const elementoActivo = document.activeElement;
+    if (elementoActivo && elementoActivo.tagName === 'INPUT' && elementoActivo.type === 'text') {
+        return;     }
+
     if (menuActual === 'ninguno') return; 
 
     const tecla = event.key.toLowerCase();
@@ -668,7 +672,7 @@ window.addEventListener('keydown', function(event) {
         if (menuActual === 'seleccion_inicial') maxCol = 5;  
 
         if (colSeleccionada < maxCol) { 
-            colisma = colSeleccionada++; 
+            colSeleccionada++; 
             actualizarEnfoqueVisualTeclado(); 
         }
     }
